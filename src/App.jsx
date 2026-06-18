@@ -85,25 +85,30 @@ export default function App() {
     }
     return a;
   });
-  const [placed, setPlaced] = useState([]); // ordered ids
+  const [placed, setPlaced] = useState([null, null, null]); // 3 fixed slots, each an id or null
   const [check, setCheck] = useState(null); // null | "wrong" | "correct"
 
   const pool = shuffled.filter((b) => !placed.includes(b.id));
   const textOf = (id) => ALL_BLOCKS.find((b) => b.id === id).text;
 
   const place = (id) => {
-    if (check === 'correct' || placed.length >= 3) return;
-    setPlaced([...placed, id]);
+    if (check === 'correct') return;
+    const slot = placed.findIndex((p) => p === null);
+    if (slot === -1) return; // all three slots already filled
+    const next = [...placed];
+    next[slot] = id;
+    setPlaced(next);
     setCheck(null);
   };
-  const unplace = (id) => {
+  const unplace = (index) => {
     if (check === 'correct') return;
-    setPlaced(placed.filter((p) => p !== id));
+    const next = [...placed];
+    next[index] = null;
+    setPlaced(next);
     setCheck(null);
   };
   const runCheck = () => {
-    const ok =
-      placed.length === 3 && placed.every((id, i) => id === CORRECT_ORDER[i]);
+    const ok = placed.every((id, i) => id === CORRECT_ORDER[i]);
     setCheck(ok ? 'correct' : 'wrong');
   };
 
@@ -404,17 +409,16 @@ export default function App() {
               </p>
 
               {/* answer slots */}
-              <div
-                className={check === 'wrong' ? 'shake' : ''}
-                style={{ marginBottom: 18 }}
-              >
+              <div style={{ marginBottom: 18 }}>
                 {[0, 1, 2].map((i) => {
                   const id = placed[i];
                   const correctNow = check === 'correct';
+                  const wrongSlot = check === 'wrong' && id !== CORRECT_ORDER[i];
                   return (
                     <div
                       key={i}
-                      onClick={() => id && unplace(id)}
+                      onClick={() => id && unplace(i)}
+                      className={wrongSlot ? 'shake' : ''}
                       style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -424,11 +428,19 @@ export default function App() {
                         marginBottom: 10,
                         borderRadius: 13,
                         border: `1.5px ${id ? 'solid' : 'dashed'} ${
-                          correctNow ? C.green : id ? C.accent : C.line
+                          correctNow
+                            ? C.green
+                            : wrongSlot
+                            ? C.red
+                            : id
+                            ? C.accent
+                            : C.line
                         }`,
                         background: id
                           ? correctNow
                             ? '#EAF6EF'
+                            : wrongSlot
+                            ? '#FBEAEA'
                             : '#F3F5FD'
                           : C.lockBg,
                         cursor: id ? 'pointer' : 'default',
@@ -443,6 +455,8 @@ export default function App() {
                           background: id
                             ? correctNow
                               ? C.green
+                              : wrongSlot
+                              ? C.red
                               : C.accent
                             : C.line,
                           color: '#fff',
@@ -491,7 +505,7 @@ export default function App() {
                     marginTop: 16,
                   }}
                 >
-                  Not quite — you need three pieces, in the right order. Tap one
+                  Not quite — the pieces marked in red need to change. Tap one
                   to send it back and retry.
                 </p>
               )}
@@ -523,7 +537,7 @@ export default function App() {
               {check !== 'correct' && (
                 <PrimaryButton
                   style={{ marginTop: 20 }}
-                  disabled={placed.length !== 3}
+                  disabled={placed.includes(null)}
                   onClick={runCheck}
                 >
                   Check answer
