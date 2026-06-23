@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  ::-webkit-scrollbar { width: 0; height: 0; }
+  @keyframes scFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes scPop { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div style="min-height:100vh; display:flex; align-items:center; justify-content:center; background:radial-gradient(120% 90% at 50% 0%, #efe9e0 0%, #e4ded4 60%, #ddd6ca 100%); padding:40px 20px; font-family:'Hanken Grotesk',-apple-system,sans-serif;">
+  <div style="width:390px; height:844px; background:#faf7f2; border-radius:48px; box-shadow:0 40px 90px rgba(45,33,20,.28), 0 0 0 11px #14151a, 0 0 0 13px #2c2f37; position:relative; overflow:hidden; display:flex; flex-direction:column;">
+
+    <!-- status bar -->
+    <div style="height:52px; flex:none; display:flex; align-items:flex-end; justify-content:space-between; padding:0 30px 9px; position:relative; z-index:5;">
+      <span style="font-size:15px; font-weight:700; color:#20242b; letter-spacing:-.2px;">9:41</span>
+      <div style="position:absolute; left:50%; top:11px; transform:translateX(-50%); width:118px; height:30px; background:#14151a; border-radius:18px;"></div>
+      <div style="display:flex; gap:7px; align-items:center;">
+        <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="1" fill="#20242b"></rect><rect x="5" y="4.5" width="3" height="7.5" rx="1" fill="#20242b"></rect><rect x="10" y="2" width="3" height="10" rx="1" fill="#20242b"></rect><rect x="15" y="0" width="3" height="12" rx="1" fill="#20242b"></rect></svg>
+        <svg width="25" height="13" viewBox="0 0 25 13"><rect x="1" y="1" width="20" height="11" rx="3" fill="none" stroke="#20242b" stroke-opacity=".4"></rect><rect x="3" y="3" width="15" height="7" rx="1.5" fill="#20242b"></rect><rect x="22.5" y="4.5" width="1.6" height="4" rx="1" fill="#20242b" fill-opacity=".5"></rect></svg>
+      </div>
+    </div>
+
+    <!-- screen area -->
+    <div style="flex:1; overflow-y:auto; position:relative;">
+
+      <!-- ============ HOME ============ -->
+      <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:8px 24px 28px; animation:scFade .5s ease both;">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:24px;">
+          <div>
+            <div style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#b45309;">Tue · 23 June</div>
+            <div style="font-family:'Newsreader',serif; font-size:29px; font-weight:500; color:#20242b; letter-spacing:-.4px; margin-top:5px; line-height:1.1;">Good morning!</div>
+          </div>
+          <div style="width:46px; height:46px; border-radius:50%; background:linear-gradient(150deg,#2c3038,#454b56); color:#faf7f2; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:16px; flex:none; box-shadow:0 4px 12px rgba(40,30,20,.18);">AA</div>
+        </div>
+
+        <!-- streak -->
+        
+
+        <!-- continue hero -->
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:#fff; border:1px solid #efe8dd; border-radius:18px; margin-bottom:18px;">
+          <div>
+            <div style="font-size:22px; font-family:'Newsreader',serif; color:#20242b; line-height:1;">12<span style="font-size:13px; color:#8a93a0; font-family:'Hanken Grotesk'; margin-left:4px;">day streak</span></div>
+          </div>
+          <div style="display:flex; gap:7px;">
+            <sc-for list="{{ week }}" as="d" hint-placeholder-count="7">
+              <div style="display:flex; flex-direction:column; align-items:center; gap:5px;">
+                <div style="width:9px; height:9px; border-radius:50%; background:{{ d.color }};"></div>
+                <span style="font-size:9px; color:#a7afba; font-weight:600;">{{ d.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div><div onClick="{{ goLesson }}" style="position:relative; background:linear-gradient(165deg,#23272e 0%,#33383f 100%); border-radius:24px; padding:24px 22px; color:#f3ede2; margin-bottom:24px; cursor:pointer; overflow:hidden; box-shadow:0 18px 38px rgba(35,25,15,.26);">
+          <div style="position:absolute; right:-40px; top:-40px; width:160px; height:160px; border-radius:50%; border:1px solid rgba(243,237,226,.12);"></div>
+          <div style="position:absolute; right:-10px; bottom:-60px; width:140px; height:140px; border-radius:50%; border:1px solid rgba(243,237,226,.1);"></div>
+          <div style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#e8a765;">Continue · Unit 3</div>
+          <div style="font-family:'Newsreader',serif; font-size:25px; font-weight:500; margin:8px 0 4px; letter-spacing:-.3px;">Negotiation &amp; Influence</div>
+          <div style="font-size:13.5px; color:#b9b3a7; margin-bottom:20px;">Anchoring the first offer</div>
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div style="flex:1; height:5px; background:rgba(243,237,226,.16); border-radius:3px; overflow:hidden;"><div style="width:62%; height:100%; background:#e8a765; border-radius:3px;"></div></div>
+            <span style="font-size:12px; color:#cfc8bb; font-weight:600;">62%</span>
+            <div style="width:40px; height:40px; border-radius:50%; background:#e8a765; display:flex; align-items:center; justify-content:center; flex:none;">
+              <svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 2l8 5-8 5z" fill="#23272e"></path></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- section label -->
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+          <span style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#8a93a0;">Today's practice</span>
+          <div style="flex:1; height:1px; background:#e8e0d4;"></div>
+        </div>
+
+        <div style="display:flex; gap:14px; margin-bottom:22px;">
+          <div onClick="{{ goPractice }}" style="flex:1; background:#fff; border:1px solid #efe8dd; border-radius:20px; padding:18px 16px; cursor:pointer;">
+            <div style="width:38px; height:38px; border-radius:11px; background:#fbeedd; display:flex; align-items:center; justify-content:center; margin-bottom:30px;">
+              <svg width="19" height="19" viewBox="0 0 20 20" fill="none"><path d="M3 5.5A2.5 2.5 0 015.5 3h9A2.5 2.5 0 0117 5.5v5A2.5 2.5 0 0114.5 13H8l-4 3.5V13H5.5A2.5 2.5 0 013 10.5z" stroke="#b45309" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+            </div>
+            <div style="font-family:'Newsreader',serif; font-size:18px; color:#20242b;">Role-play</div>
+            <div style="font-size:12.5px; color:#8a93a0; margin-top:2px;">Hold a meeting</div>
+          </div>
+          <div onClick="{{ goVocab }}" style="flex:1; background:#fff; border:1px solid #efe8dd; border-radius:20px; padding:18px 16px; cursor:pointer;">
+            <div style="width:38px; height:38px; border-radius:11px; background:#eef2ec; display:flex; align-items:center; justify-content:center; margin-bottom:30px;">
+              <svg width="19" height="19" viewBox="0 0 20 20" fill="none"><rect x="3.5" y="4" width="13" height="12" rx="2" stroke="#3f7d5e" stroke-width="1.5"></rect><path d="M10 4v12M6.5 7.5h1M6.5 10h1" stroke="#3f7d5e" stroke-width="1.5" stroke-linecap="round"></path></svg>
+            </div>
+            <div style="font-family:'Newsreader',serif; font-size:18px; color:#20242b;">Vocabulary</div>
+            <div style="font-size:12.5px; color:#8a93a0; margin-top:2px;">18 cards due</div>
+          </div>
+        </div>
+
+        <!-- phrase of the day -->
+        <div style="border:1px dashed #d9cfbf; border-radius:20px; padding:18px 20px;">
+          <div style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#b45309; margin-bottom:8px;">Phrase of the day</div>
+          <div style="font-family:'Newsreader',serif; font-size:19px; font-style:italic; color:#20242b; line-height:1.35;">"Let's circle back to that once we've aligned on scope."</div>
+          <div style="font-size:12.5px; color:#8a93a0; margin-top:8px;">Use it to defer a topic without dismissing it.</div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ ONBOARDING ============ -->
+      <sc-if value="{{ isOnboarding }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:18px 26px 30px; min-height:100%; display:flex; flex-direction:column;">
+        <div style="display:flex; gap:6px; margin-bottom:34px;">
+          <sc-for list="{{ obDots }}" as="d" hint-placeholder-count="3">
+            <div style="height:7px; width:{{ d.w }}; background:{{ d.c }}; border-radius:4px; transition:all .3s;"></div>
+          </sc-for>
+        </div>
+
+        <!-- step 0: level -->
+        <sc-if value="{{ obStep0 }}" hint-placeholder-val="{{ true }}">
+        <div style="animation:scFade .4s ease both; flex:1;">
+          <div style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#b45309;">Step 1 of 3</div>
+          <div style="font-family:'Newsreader',serif; font-size:30px; font-weight:500; color:#20242b; letter-spacing:-.5px; margin:8px 0 6px; line-height:1.12;">How comfortable are you in English at work?</div>
+          <div style="font-size:14px; color:#8a93a0; margin-bottom:24px;">We'll calibrate every lesson to your level.</div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <sc-for list="{{ levels }}" as="l" hint-placeholder-count="4">
+              <div onClick="{{ l.onPick }}" style="display:flex; align-items:center; gap:14px; padding:15px 16px; background:{{ l.bg }}; border:1.5px solid {{ l.ring }}; border-radius:16px; cursor:pointer; transition:all .15s;">
+                <div style="width:20px; height:20px; border-radius:50%; border:2px solid {{ l.ring }}; flex:none; display:flex; align-items:center; justify-content:center;"><div style="width:9px; height:9px; border-radius:50%; background:{{ l.ring }}; opacity:{{ l.selOp }};"></div></div>
+                <div>
+                  <div style="font-weight:600; font-size:15px; color:#20242b;">{{ l.label }}</div>
+                  <div style="font-size:12.5px; color:#8a93a0; margin-top:1px;">{{ l.desc }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- step 1: goal -->
+        <sc-if value="{{ obStep1 }}" hint-placeholder-val="{{ true }}">
+        <div style="animation:scFade .4s ease both; flex:1;">
+          <div style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#b45309;">Step 2 of 3</div>
+          <div style="font-family:'Newsreader',serif; font-size:30px; font-weight:500; color:#20242b; letter-spacing:-.5px; margin:8px 0 6px; line-height:1.12;">What do you most want to get better at?</div>
+          <div style="font-size:14px; color:#8a93a0; margin-bottom:24px;">Pick your first focus — you can change it anytime.</div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <sc-for list="{{ goals }}" as="g" hint-placeholder-count="4">
+              <div onClick="{{ g.onPick }}" style="display:flex; align-items:center; gap:13px; padding:17px 16px; background:{{ g.bg }}; border:1.5px solid {{ g.ring }}; border-radius:16px; cursor:pointer;">
+                <div style="width:8px; height:8px; border-radius:50%; background:{{ g.dot }}; flex:none;"></div>
+                <div style="font-weight:600; font-size:15.5px; color:#20242b; font-family:'Newsreader',serif;">{{ g.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- step 2: ready -->
+        <sc-if value="{{ obStep2 }}" hint-placeholder-val="{{ true }}">
+        <div style="animation:scFade .4s ease both; flex:1; display:flex; flex-direction:column; justify-content:center;">
+          <div style="width:60px; height:60px; border-radius:18px; background:#23272e; display:flex; align-items:center; justify-content:center; margin-bottom:22px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#e8a765" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <div style="font-family:'Newsreader',serif; font-size:32px; font-weight:500; color:#20242b; letter-spacing:-.5px; line-height:1.1;">Your plan is ready.</div>
+          <div style="font-size:15px; color:#5b6470; margin:12px 0 26px; line-height:1.5;">A 6-week track built around <b style="color:#b45309;">meetings &amp; negotiation</b>, calibrated to your level. 10 focused minutes a day.</div>
+          <div style="display:flex; flex-direction:column; gap:1px; background:#ece5d9; border:1px solid #ece5d9; border-radius:16px; overflow:hidden;">
+            <div style="display:flex; justify-content:space-between; padding:14px 16px; background:#fff;"><span style="color:#8a93a0; font-size:14px;">Daily goal</span><span style="font-weight:600; font-size:14px; color:#20242b;">10 min</span></div>
+            <div style="display:flex; justify-content:space-between; padding:14px 16px; background:#fff;"><span style="color:#8a93a0; font-size:14px;">First unit</span><span style="font-weight:600; font-size:14px; color:#20242b;">Anchoring offers</span></div>
+            <div style="display:flex; justify-content:space-between; padding:14px 16px; background:#fff;"><span style="color:#8a93a0; font-size:14px;">First role-play</span><span style="font-weight:600; font-size:14px; color:#20242b;">Deadline talk</span></div>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- footer button -->
+        <sc-if value="{{ obStep2 }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ finishOnboard }}" style="margin-top:20px; height:54px; background:#23272e; color:#f3ede2; border-radius:16px; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:16px; cursor:pointer;">Start learning</div>
+        </sc-if>
+        <sc-if value="{{ obNotLast }}" hint-placeholder-val="{{ true }}">
+          <div onClick="{{ nextOnboard }}" style="margin-top:20px; height:54px; background:{{ obBtnBg }}; color:#f3ede2; border-radius:16px; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:16px; cursor:pointer; transition:background .2s;">Continue</div>
+        </sc-if>
+      </div>
+      </sc-if>
+
+      <!-- ============ LESSON ============ -->
+      <sc-if value="{{ isLesson }}" hint-placeholder-val="{{ true }}">
+      <div style="min-height:100%; display:flex; flex-direction:column;">
+        <div style="position:sticky; top:0; background:#faf7f2; padding:6px 24px 14px; z-index:4;">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div onClick="{{ goHome }}" style="width:34px; height:34px; border-radius:50%; background:#fff; border:1px solid #ece5d9; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:none;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3l-5 5 5 5" stroke="#20242b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+            <div style="flex:1; height:6px; background:#ece5d9; border-radius:4px; overflow:hidden;"><div style="height:100%; width:{{ lProg }}%; background:#b45309; border-radius:4px; transition:width .35s;"></div></div>
+          </div>
+        </div>
+
+        <div style="flex:1; padding:10px 26px 24px;">
+          <!-- concept -->
+          <sc-if value="{{ lStep0 }}" hint-placeholder-val="{{ true }}">
+          <div style="animation:scFade .4s ease both;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#b45309;">Unit 3 · Concept</div>
+            <div style="font-family:'Newsreader',serif; font-size:28px; font-weight:500; color:#20242b; margin:8px 0 16px; letter-spacing:-.4px; line-height:1.15;">Anchoring the first offer</div>
+            <div style="font-size:15.5px; color:#444b54; line-height:1.6; margin-bottom:18px;">In a negotiation, the first concrete number or scope you name becomes the <b>anchor</b> — the reference everything else is judged against. A vague opener gives the anchor away.</div>
+            <div style="background:#fff; border:1px solid #efe8dd; border-radius:18px; padding:18px 18px 16px;">
+              <div style="font-size:11px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:#8a93a0; margin-bottom:10px;">Weak vs. anchored</div>
+              <div style="display:flex; gap:10px; align-items:flex-start; margin-bottom:12px;"><div style="width:6px; height:6px; border-radius:50%; background:#b4453a; margin-top:7px; flex:none;"></div><div style="font-size:14.5px; color:#8a93a0; font-style:italic;">"We'll try to get it done soon."</div></div>
+              <div style="display:flex; gap:10px; align-items:flex-start;"><div style="width:6px; height:6px; border-radius:50%; background:#3f7d5e; margin-top:7px; flex:none;"></div><div style="font-size:14.5px; color:#20242b; font-style:italic;">"I can commit the core build by Friday, and the rest by Tuesday."</div></div>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- mcq -->
+          <sc-if value="{{ lMcq }}" hint-placeholder-val="{{ false }}">
+          <div style="animation:scFade .4s ease both;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#b45309; margin-bottom:14px;">Choose the best line</div>
+            <div style="font-family:'Newsreader',serif; font-size:21px; font-weight:500; color:#20242b; line-height:1.3; margin-bottom:20px;">{{ lMcq.q }}</div>
+            <div style="display:flex; flex-direction:column; gap:11px;">
+              <sc-for list="{{ lOptions }}" as="o" hint-placeholder-count="3">
+                <div onClick="{{ o.onPick }}" style="padding:15px 16px; background:{{ o.bg }}; border:1.5px solid {{ o.bd }}; border-radius:14px; cursor:pointer; font-size:14.5px; line-height:1.4; color:{{ o.col }}; transition:all .15s;">{{ o.t }}</div>
+              </sc-for>
+            </div>
+            <sc-if value="{{ lAnswered }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:16px; padding:15px 16px; background:#f4efe6; border-radius:14px; animation:scFade .35s ease both;">
+                <div style="font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:#b45309; margin-bottom:6px;">Why</div>
+                <div style="font-size:14px; color:#444b54; line-height:1.5;">{{ lWhy }}</div>
+              </div>
+            </sc-if>
+          </div>
+          </sc-if>
+
+          <!-- recap -->
+          <sc-if value="{{ lStep3 }}" hint-placeholder-val="{{ false }}">
+          <div style="animation:scFade .4s ease both; text-align:center; padding-top:30px;">
+            <div style="width:58px; height:58px; border-radius:50%; background:#eef5ef; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#3f7d5e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+            <div style="font-family:'Newsreader',serif; font-size:27px; font-weight:500; color:#20242b; letter-spacing:-.3px;">Lesson complete</div>
+            <div style="font-size:14.5px; color:#8a93a0; margin:10px 0 24px; line-height:1.5;">You've learned to anchor with a concrete, phased commitment. Try it live in a role-play.</div>
+            <div onClick="{{ startRoleplay }}" style="display:inline-flex; align-items:center; gap:8px; padding:12px 20px; background:#fbeedd; border-radius:30px; color:#b45309; font-weight:600; font-size:14px; cursor:pointer;">Practice in a role-play →</div>
+          </div>
+          </sc-if>
+        </div>
+
+        <div style="padding:0 26px 22px;">
+          <div onClick="{{ lessonNext }}" style="height:54px; background:{{ lBtnBg }}; color:#f3ede2; border-radius:16px; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:16px; cursor:pointer; transition:background .2s;">{{ lBtnLabel }}</div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ PRACTICE HUB ============ -->
+      <sc-if value="{{ isPractice }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:8px 24px 28px; animation:scFade .5s ease both;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#b45309;">Practice</div>
+        <div style="font-family:'Newsreader',serif; font-size:29px; font-weight:500; color:#20242b; letter-spacing:-.4px; margin:5px 0 24px;">Rehearse the hard moments</div>
+
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#8a93a0;">Role-play scenarios</span><div style="flex:1; height:1px; background:#e8e0d4;"></div></div>
+
+        <div onClick="{{ startRoleplay }}" style="position:relative; background:linear-gradient(160deg,#27424a,#355a5e); border-radius:22px; padding:22px; color:#eef3f0; margin-bottom:12px; cursor:pointer; overflow:hidden; box-shadow:0 16px 32px rgba(30,45,40,.22);">
+          <div style="position:absolute; right:-30px; top:-30px; width:130px; height:130px; border-radius:50%; border:1px solid rgba(255,255,255,.1);"></div>
+          <div style="display:inline-flex; align-items:center; gap:6px; padding:4px 10px; background:rgba(232,167,101,.2); border-radius:20px; font-size:10.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#f0c79a; margin-bottom:14px;">Recommended</div>
+          <div style="font-family:'Newsreader',serif; font-size:23px; font-weight:500; margin-bottom:5px;">Negotiating a deadline</div>
+          <div style="font-size:13.5px; color:#bcd0cf; line-height:1.45; margin-bottom:18px;">A tense client meeting. Hold the relationship while setting realistic expectations.</div>
+          <div style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600;"><span>Begin</span><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="#e8a765" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:14px; padding:17px 18px; background:#fff; border:1px solid #efe8dd; border-radius:18px; margin-bottom:10px; opacity:.7;">
+          <div style="width:42px; height:42px; border-radius:12px; background:#f1ece2; display:flex; align-items:center; justify-content:center; flex:none;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="10" rx="2" stroke="#8a93a0" stroke-width="1.5"></rect><path d="M7 9h6M7 11.5h4" stroke="#8a93a0" stroke-width="1.5" stroke-linecap="round"></path></svg></div>
+          <div style="flex:1;"><div style="font-family:'Newsreader',serif; font-size:17px; color:#20242b;">Running a status meeting</div><div style="font-size:12.5px; color:#9aa2ad;">Keep it on time and on track</div></div>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" stroke="#b0b7c0" stroke-width="1.4"></rect><path d="M5.5 7V5.5a2.5 2.5 0 015 0V7" stroke="#b0b7c0" stroke-width="1.4"></path></svg>
+        </div>
+        <div style="display:flex; align-items:center; gap:14px; padding:17px 18px; background:#fff; border:1px solid #efe8dd; border-radius:18px; margin-bottom:24px; opacity:.7;">
+          <div style="width:42px; height:42px; border-radius:12px; background:#f1ece2; display:flex; align-items:center; justify-content:center; flex:none;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="#8a93a0" stroke-width="1.5"></circle><path d="M4.5 16a5.5 5.5 0 0111 0" stroke="#8a93a0" stroke-width="1.5" stroke-linecap="round"></path></svg></div>
+          <div style="flex:1;"><div style="font-family:'Newsreader',serif; font-size:17px; color:#20242b;">Giving difficult feedback</div><div style="font-size:12.5px; color:#9aa2ad;">Be direct and kind at once</div></div>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" stroke="#b0b7c0" stroke-width="1.4"></rect><path d="M5.5 7V5.5a2.5 2.5 0 015 0V7" stroke="#b0b7c0" stroke-width="1.4"></path></svg>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#8a93a0;">Words &amp; phrases</span><div style="flex:1; height:1px; background:#e8e0d4;"></div></div>
+        <div onClick="{{ goVocab }}" style="display:flex; align-items:center; gap:14px; padding:18px; background:#fff; border:1px solid #efe8dd; border-radius:18px; cursor:pointer;">
+          <div style="width:42px; height:42px; border-radius:12px; background:#eef2ec; display:flex; align-items:center; justify-content:center; flex:none;"><svg width="19" height="19" viewBox="0 0 20 20" fill="none"><rect x="3.5" y="4" width="13" height="12" rx="2" stroke="#3f7d5e" stroke-width="1.5"></rect><path d="M10 4v12" stroke="#3f7d5e" stroke-width="1.5"></path></svg></div>
+          <div style="flex:1;"><div style="font-family:'Newsreader',serif; font-size:17px; color:#20242b;">Review flashcards</div><div style="font-size:12.5px; color:#9aa2ad;">18 cards due today</div></div>
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="#b45309" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ ROLE-PLAY ============ -->
+      <sc-if value="{{ isRoleplay }}" hint-placeholder-val="{{ true }}">
+      <div style="min-height:100%; display:flex; flex-direction:column; background:#f4efe7;">
+        <div style="position:sticky; top:0; background:rgba(244,239,231,.95); backdrop-filter:blur(8px); padding:6px 22px 12px; z-index:4; border-bottom:1px solid #e7ddcd;">
+          <div style="display:flex; align-items:center; gap:13px;">
+            <div onClick="{{ goPractice }}" style="width:34px; height:34px; border-radius:50%; background:#fff; border:1px solid #e7ddcd; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:none;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3l-5 5 5 5" stroke="#20242b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+            <div style="flex:1;"><div style="font-weight:600; font-size:14.5px; color:#20242b;">Negotiating a deadline</div><div style="font-size:11.5px; color:#9aa2ad;">with Dana · VP, Client</div></div>
+            <sc-if value="{{ rpActive }}" hint-placeholder-val="{{ true }}"><div style="font-size:11px; font-weight:700; color:#b45309; background:#fbeedd; padding:5px 10px; border-radius:20px;">Turn {{ rpStep }}/3</div></sc-if>
+          </div>
+        </div>
+
+        <div style="flex:1; padding:18px 20px 24px; display:flex; flex-direction:column; gap:16px;">
+          <sc-if value="{{ rpShowScene }}" hint-placeholder-val="{{ true }}">
+            <div style="background:#fff; border:1px solid #ece2d2; border-radius:16px; padding:16px 18px; animation:scFade .4s ease both;">
+              <div style="font-size:11px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:#8a93a0; margin-bottom:7px;">The scene</div>
+              <div style="font-size:14px; color:#444b54; line-height:1.55;">Your deliverables are running late. Dana's board expected them last week. Your goal: keep her trust while setting realistic, specific expectations.</div>
+            </div>
+          </sc-if>
+
+          <!-- transcript -->
+          <sc-for list="{{ rpLog }}" as="e" hint-placeholder-count="0">
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div style="display:flex; gap:9px; align-items:flex-end;">
+                <div style="width:30px; height:30px; border-radius:50%; background:#355a5e; color:#eef3f0; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; flex:none;">D</div>
+                <div style="background:#fff; border:1px solid #ece2d2; border-radius:16px 16px 16px 4px; padding:11px 14px; font-size:13.5px; color:#3a414a; line-height:1.45; max-width:255px;">{{ e.npc }}</div>
+              </div>
+              <div style="display:flex; flex-direction:column; align-items:flex-end; gap:5px;">
+                <div style="background:#23272e; color:#f1ece2; border-radius:16px 16px 4px 16px; padding:11px 14px; font-size:13.5px; line-height:1.45; max-width:255px;">{{ e.user }}</div>
+                <div style="display:flex; gap:7px; align-items:flex-start; max-width:262px; background:#fff; border:1px solid #efe8dd; border-radius:12px; padding:9px 11px;">
+                  <span style="font-size:9.5px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; color:{{ e.qColor }}; background:#f6f1e8; padding:3px 7px; border-radius:8px; flex:none;">{{ e.qLabel }}</span>
+                  <span style="font-size:12px; color:#6b7480; line-height:1.4;">{{ e.fb }}</span>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+
+          <!-- current prompt + choices -->
+          <sc-if value="{{ rpActive }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; flex-direction:column; gap:14px; animation:scFade .4s ease both;">
+            <div style="display:flex; gap:9px; align-items:flex-end;">
+              <div style="width:30px; height:30px; border-radius:50%; background:#355a5e; color:#eef3f0; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; flex:none;">D</div>
+              <div style="flex:1;">
+                <div style="font-size:10px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:#9aa2ad; margin:0 0 4px 2px;">Dana · {{ rpEmotion }}</div>
+                <div style="background:#fff; border:1px solid #ece2d2; border-radius:16px 16px 16px 4px; padding:13px 15px; font-size:14px; color:#2e353d; line-height:1.5;">{{ rpNpc }}</div>
+              </div>
+            </div>
+            <div style="font-size:11px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#b45309; margin-left:2px;">Your reply</div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <sc-for list="{{ rpChoices }}" as="c" hint-placeholder-count="3">
+                <div onClick="{{ c.onPick }}" style="background:#fff; border:1.5px solid #e7ddcd; border-radius:14px; padding:13px 15px; font-size:13.5px; color:#2e353d; line-height:1.45; cursor:pointer; transition:all .15s;" style-hover="border-color:#b45309; background:#fffaf2;">{{ c.t }}</div>
+              </sc-for>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- summary -->
+          <sc-if value="{{ rpDone }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#fff; border:1px solid #ece2d2; border-radius:20px; padding:24px 22px; text-align:center; animation:scPop .4s ease both; margin-top:6px;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#b45309;">Debrief</div>
+            <div style="font-family:'Newsreader',serif; font-size:26px; font-weight:500; color:#20242b; margin:8px 0 18px; letter-spacing:-.3px;">How you handled Dana</div>
+            <div style="display:flex; align-items:baseline; justify-content:center; gap:4px; margin-bottom:6px;"><span style="font-family:'Newsreader',serif; font-size:46px; color:{{ rpRatingColor }}; line-height:1;">{{ rpScore }}</span><span style="font-size:18px; color:#b0b7c0;">/ 6</span></div>
+            <div style="font-weight:600; font-size:15px; color:{{ rpRatingColor }}; margin-bottom:18px;">{{ rpRating }}</div>
+            <div style="font-size:13.5px; color:#6b7480; line-height:1.55; margin-bottom:22px;">You kept the conversation moving toward specifics. The strongest moves named concrete commitments and a clear cadence — that's what rebuilds a client's confidence.</div>
+            <div style="display:flex; gap:10px;">
+              <div onClick="{{ rpRestart }}" style="flex:1; height:48px; border:1.5px solid #ddd3c4; border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14.5px; color:#5b6470; cursor:pointer;">Try again</div>
+              <div onClick="{{ goPractice }}" style="flex:1; height:48px; background:#23272e; color:#f1ece2; border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14.5px; cursor:pointer;">Done</div>
+            </div>
+          </div>
+          </sc-if>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ VOCABULARY ============ -->
+      <sc-if value="{{ isVocab }}" hint-placeholder-val="{{ true }}">
+      <div style="min-height:100%; display:flex; flex-direction:column;">
+        <div style="position:sticky; top:0; background:#faf7f2; padding:6px 24px 14px; z-index:4;">
+          <div style="display:flex; align-items:center; gap:13px;">
+            <div onClick="{{ goPractice }}" style="width:34px; height:34px; border-radius:50%; background:#fff; border:1px solid #ece5d9; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:none;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3l-5 5 5 5" stroke="#20242b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+            <div style="flex:1;"><div style="font-weight:600; font-size:14.5px; color:#20242b;">Vocabulary</div></div>
+            <div style="font-size:13px; color:#9aa2ad; font-weight:600;">{{ vNum }} / {{ vTotal }}</div>
+          </div>
+        </div>
+
+        <div style="flex:1; padding:14px 26px 26px; display:flex; flex-direction:column;">
+          <sc-if value="{{ vDone }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; animation:scPop .4s ease both;">
+            <div style="width:58px; height:58px; border-radius:50%; background:#eef5ef; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#3f7d5e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+            <div style="font-family:'Newsreader',serif; font-size:28px; font-weight:500; color:#20242b;">Session complete</div>
+            <div style="font-size:15px; color:#8a93a0; margin:10px 0 26px;">You marked <b style="color:#3f7d5e;">{{ known }}</b> of {{ vTotal }} as known. The rest will resurface tomorrow.</div>
+            <div onClick="{{ resetVocab }}" style="align-self:center; padding:13px 22px; border:1.5px solid #ddd3c4; border-radius:30px; font-weight:600; font-size:14.5px; color:#5b6470; cursor:pointer;">Review again</div>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ vActive }}" hint-placeholder-val="{{ true }}">
+          <div style="flex:1; display:flex; flex-direction:column;">
+            <div onClick="{{ flipCard }}" style="flex:1; min-height:360px; position:relative; cursor:pointer; margin-bottom:18px;">
+              <!-- definition (after flip) -->
+              <sc-if value="{{ vFlipped }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute; inset:0; background:#fff; border:1px solid #efe8dd; border-radius:24px; padding:28px; display:flex; flex-direction:column; justify-content:center; box-shadow:0 14px 30px rgba(45,33,20,.08); animation:scPop .3s ease both;">
+                  <div style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#3f7d5e; margin-bottom:14px;">Definition</div>
+                  <div style="font-size:17px; color:#2e353d; line-height:1.55; margin-bottom:20px;">{{ vCard.def }}</div>
+                  <div style="border-top:1px solid #efe8dd; padding-top:16px;"><div style="font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#9aa2ad; margin-bottom:6px;">In context</div><div style="font-family:'Newsreader',serif; font-style:italic; font-size:16px; color:#5b6470; line-height:1.45;">{{ vCard.ex }}</div></div>
+                </div>
+              </sc-if>
+              <!-- term (front) -->
+              <sc-if value="{{ vNotFlipped }}" hint-placeholder-val="{{ true }}">
+                <div style="position:absolute; inset:0; background:linear-gradient(165deg,#23272e,#33383f); border-radius:24px; padding:28px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; box-shadow:0 18px 36px rgba(35,25,15,.22);">
+                  <div style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#e8a765; margin-bottom:16px;">{{ vCard.pos }}</div>
+                  <div style="font-family:'Newsreader',serif; font-size:34px; font-weight:500; color:#f3ede2; letter-spacing:-.4px; line-height:1.1;">{{ vCard.term }}</div>
+                  <div style="margin-top:24px; font-size:12.5px; color:#9aa2ad; display:flex; align-items:center; gap:6px;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M2 8a6 6 0 0110-4.5M14 8a6 6 0 01-10 4.5" stroke="#9aa2ad" stroke-width="1.4" stroke-linecap="round"></path><path d="M12 2v3h-3M4 14v-3h3" stroke="#9aa2ad" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>Tap to reveal meaning</div>
+                </div>
+              </sc-if>
+            </div>
+
+            <sc-if value="{{ vFlipped }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; gap:11px; animation:scFade .3s ease both;">
+                <div onClick="{{ markUnknown }}" style="flex:1; height:52px; border:1.5px solid #e6c4bd; background:#fbf3f1; color:#b4453a; border-radius:15px; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14.5px; cursor:pointer;">Still learning</div>
+                <div onClick="{{ markKnown }}" style="flex:1; height:52px; border:1.5px solid #b9d5c4; background:#eef5ef; color:#2f6b4d; border-radius:15px; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14.5px; cursor:pointer;">I know this</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ vNotFlipped }}" hint-placeholder-val="{{ true }}">
+              <div style="height:52px; display:flex; align-items:center; justify-content:center; color:#b0b7c0; font-size:13px;">Tap the card to see its meaning</div>
+            </sc-if>
+          </div>
+          </sc-if>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ PROGRESS ============ -->
+      <sc-if value="{{ isProgress }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:8px 24px 28px; animation:scFade .5s ease both;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#b45309;">Your progress</div>
+        <div style="font-family:'Newsreader',serif; font-size:29px; font-weight:500; color:#20242b; letter-spacing:-.4px; margin:5px 0 22px;">Six weeks, measured</div>
+
+        <div style="display:flex; gap:12px; margin-bottom:14px;">
+          <div style="flex:1; background:#fff; border:1px solid #efe8dd; border-radius:18px; padding:16px;"><div style="font-family:'Newsreader',serif; font-size:30px; color:#20242b; line-height:1;">12</div><div style="font-size:12px; color:#8a93a0; margin-top:4px;">Day streak</div></div>
+          <div style="flex:1; background:#fff; border:1px solid #efe8dd; border-radius:18px; padding:16px;"><div style="font-family:'Newsreader',serif; font-size:30px; color:#20242b; line-height:1;">128</div><div style="font-size:12px; color:#8a93a0; margin-top:4px;">Words learned</div></div>
+          <div style="flex:1; background:#fff; border:1px solid #efe8dd; border-radius:18px; padding:16px;"><div style="font-family:'Newsreader',serif; font-size:30px; color:#b45309; line-height:1;">B2</div><div style="font-size:12px; color:#8a93a0; margin-top:4px;">Est. level</div></div>
+        </div>
+
+        <!-- weekly bars -->
+        <div style="background:#fff; border:1px solid #efe8dd; border-radius:20px; padding:20px; margin-bottom:14px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;"><span style="font-size:11px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:#8a93a0;">Minutes this week</span><span style="font-size:12.5px; color:#b45309; font-weight:600;">+18%</span></div>
+          <div style="display:flex; align-items:flex-end; gap:10px; height:96px;">
+            <sc-for list="{{ bars }}" as="b" hint-placeholder-count="7">
+              <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:7px; justify-content:flex-end; height:100%;">
+                <div style="width:100%; height:{{ b.h }}; background:{{ b.c }}; border-radius:5px; transition:height .4s;"></div>
+                <span style="font-size:10px; color:#a7afba; font-weight:600;">{{ b.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- skills -->
+        <div style="background:#fff; border:1px solid #efe8dd; border-radius:20px; padding:20px; margin-bottom:14px;">
+          <div style="font-size:11px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:#8a93a0; margin-bottom:16px;">Skills</div>
+          <div style="display:flex; flex-direction:column; gap:15px;">
+            <sc-for list="{{ skills }}" as="sk" hint-placeholder-count="4">
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:7px;"><span style="font-size:13.5px; color:#3a414a; font-weight:500;">{{ sk.name }}</span><span style="font-size:12.5px; color:#9aa2ad;">{{ sk.label }}</span></div>
+                <div style="height:6px; background:#f0ebe1; border-radius:4px; overflow:hidden;"><div style="height:100%; width:{{ sk.pct }}%; background:{{ sk.c }}; border-radius:4px;"></div></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- achievements -->
+        <div style="display:flex; align-items:center; gap:12px; margin:6px 0 14px;"><span style="font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#8a93a0;">Achievements</span><div style="flex:1; height:1px; background:#e8e0d4;"></div></div>
+        <div style="display:flex; gap:11px;">
+          <sc-for list="{{ badges }}" as="bd" hint-placeholder-count="3">
+            <div style="flex:1; background:{{ bd.bg }}; border:1px solid {{ bd.bd }}; border-radius:16px; padding:15px 10px; text-align:center;">
+              <div style="width:34px; height:34px; border-radius:50%; background:{{ bd.ic }}; margin:0 auto 9px; display:flex; align-items:center; justify-content:center; font-family:'Newsreader',serif; color:#fff; font-size:15px;">{{ bd.g }}</div>
+              <div style="font-size:11px; color:#5b6470; font-weight:600; line-height:1.3;">{{ bd.name }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div onClick="{{ goOnboarding }}" style="margin-top:22px; text-align:center; font-size:13px; color:#a7afba; cursor:pointer; text-decoration:underline; text-underline-offset:3px;">Replay the intro flow</div>
+      </div>
+      </sc-if>
+
+    </div>
+
+    <!-- bottom nav -->
+    <sc-if value="{{ showTabs }}" hint-placeholder-val="{{ true }}">
+    <div style="flex:none; height:84px; background:rgba(250,247,242,.92); backdrop-filter:blur(12px); border-top:1px solid #ece5d9; display:flex; align-items:flex-start; padding:11px 30px 0; justify-content:space-between;">
+      <div onClick="{{ goHome }}" style="display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; width:64px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 11l8-6.5 8 6.5M6 9.8V19a1 1 0 001 1h3v-5h4v5h3a1 1 0 001-1V9.8" stroke="{{ cHome }}" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+        <span style="font-size: 12.5px; font-weight: 600; color: {{ cHome }}">Home</span>
+      </div>
+      <div onClick="{{ goPractice }}" style="display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; width:64px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6.5A2.5 2.5 0 016.5 4h11A2.5 2.5 0 0120 6.5v7a2.5 2.5 0 01-2.5 2.5H10l-5 4v-4a2.5 2.5 0 01-1-2z" stroke="{{ cPractice }}" stroke-width="1.7" stroke-linejoin="round"></path></svg>
+        <span style="font-size: 12.5px; font-weight: 600; color: {{ cPractice }}">Practice</span>
+      </div>
+      <div onClick="{{ goProgress }}" style="display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; width:64px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="13" width="4" height="7" rx="1" stroke="{{ cProgress }}" stroke-width="1.7"></rect><rect x="10" y="8" width="4" height="12" rx="1" stroke="{{ cProgress }}" stroke-width="1.7"></rect><rect x="16" y="4" width="4" height="16" rx="1" stroke="{{ cProgress }}" stroke-width="1.7"></rect></svg>
+        <span style="font-size: 12.5px; font-weight: 600; color: {{ cProgress }}">Progress</span>
+      </div>
+    </div>
+    </sc-if>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    screen: 'onboarding',
+    onboardStep: 0, level: null, goal: null,
+    lessonStep: 0,
+    rpNode: 'start', rpLog: [], rpScore: 0, rpTurns: 0,
+    flashIndex: 0, flipped: false, knownCount: 0,
+  };
+
+  go = (screen) => this.setState({ screen });
+
+  // ---------- Onboarding ----------
+  pickLevel = (level) => this.setState({ level });
+  pickGoal = (goal) => this.setState({ goal });
+  nextOnboard = () => this.setState((st) => ({ onboardStep: st.onboardStep + 1 }));
+  finishOnboard = () => this.setState({ screen: 'home', onboardStep: 0 });
+
+  // ---------- Lesson ----------
+  lessonNext = () => this.setState((st) => {
+    if (st.lessonStep >= 3) return { screen: 'home', lessonStep: 0, lessonChoice: null };
+    return { lessonStep: st.lessonStep + 1, lessonChoice: null };
+  });
+  lessonPick = (i) => this.setState({ lessonChoice: i });
+
+  // ---------- Role-play ----------
+  rpScript() {
+    return {
+      start: {
+        npc: "Thanks for making time, Mateo. I'll be straight with you — my board expected these deliverables last week. Where do things actually stand?",
+        emotion: 'Tense',
+        choices: [
+          { t: "I understand the urgency. Let me give you exactly where we are, then a realistic path to done.", q: 'good', fb: "Strong open. You acknowledge the pressure without getting defensive, then steer to a plan.", next: 'q2' },
+          { t: "We're a little behind, but we should be able to catch up soon.", q: 'ok', fb: "'A little' and 'soon' are vague. Specifics build trust — name the status and a date.", next: 'q2' },
+          { t: "Honestly, it's not on us — your team kept changing the requirements.", q: 'weak', fb: "Blaming the client escalates. Even when true, lead with ownership and a path forward.", next: 'q2' },
+        ],
+      },
+      q2: {
+        npc: "Alright. The board still expects everything delivered Friday. Can you commit to that?",
+        emotion: 'Pressing',
+        choices: [
+          { t: "I can commit to the core features by Friday, and the remaining items by Tuesday. Would that work for the board?", q: 'good', fb: "Excellent — you offer a concrete trade-off instead of a yes/no. This is anchoring done well.", next: 'q3' },
+          { t: "Friday is tight, but we'll do our best to make it.", q: 'ok', fb: "'Do our best' commits to nothing and invites disappointment. Propose a specific scope.", next: 'q3' },
+          { t: "Sure, we'll make Friday happen, no problem.", q: 'weak', fb: "Overpromising to ease tension now creates a bigger problem Friday. Protect your credibility.", next: 'q3' },
+        ],
+      },
+      q3: {
+        npc: "A phased delivery could work — if I'm not left guessing. How will you keep me in the loop?",
+        emotion: 'Warming',
+        choices: [
+          { t: "I'll send a short status note each morning and flag any risk the moment it appears, not after.", q: 'good', fb: "Proactive and specific. Naming cadence and early-warning turns anxiety into confidence.", next: 'end' },
+          { t: "I'll reach out if anything comes up on our side.", q: 'ok', fb: "Reactive updates keep the client anxious. Offer a predictable rhythm instead.", next: 'end' },
+          { t: "You can always email me anytime.", q: 'weak', fb: "Putting the work on them signals you won't drive it. Own the communication.", next: 'end' },
+        ],
+      },
+    };
+  }
+  rpChoose = (choice, npcLine) => this.setState((st) => {
+    const pts = choice.q === 'good' ? 2 : choice.q === 'ok' ? 1 : 0;
+    const log = [...st.rpLog, { npc: npcLine, user: choice.t, fb: choice.fb, q: choice.q }];
+    return { rpLog: log, rpScore: st.rpScore + pts, rpTurns: st.rpTurns + 1, rpNode: choice.next };
+  });
+  rpRestart = () => this.setState({ rpNode: 'start', rpLog: [], rpScore: 0, rpTurns: 0 });
+  startRoleplay = () => this.setState({ screen: 'roleplay', rpNode: 'start', rpLog: [], rpScore: 0, rpTurns: 0 });
+
+  // ---------- Vocabulary ----------
+  vocab() {
+    return [
+      { term: 'To circle back', pos: 'phrasal verb', def: 'To return to a topic or task at a later, more suitable time.', ex: `"Let's circle back to the budget once we've aligned on scope."` },
+      { term: 'Touch base', pos: 'idiom', def: 'To make brief contact to share or confirm an update.', ex: `"I'll touch base with the vendor before Friday's call."` },
+      { term: 'Bandwidth', pos: 'noun', def: 'The capacity or available time someone has to take on work.', ex: `"I don't have the bandwidth to lead another workstream this quarter."` },
+      { term: 'To push back', pos: 'phrasal verb', def: 'To respectfully disagree or resist a request or decision.', ex: `"She pushed back on the timeline and asked for two more days."` },
+      { term: 'Move the needle', pos: 'idiom', def: 'To make a noticeable, meaningful difference to a result.', ex: `"This feature won't move the needle on retention."` },
+    ];
+  }
+  flipCard = () => this.setState((st) => ({ flipped: !st.flipped }));
+  rateCard = (known) => this.setState((st) => {
+    const total = this.vocab().length;
+    const next = st.flashIndex + 1;
+    return { flashIndex: next, flipped: false, knownCount: st.knownCount + (known ? 1 : 0) };
+  });
+  resetVocab = () => this.setState({ flashIndex: 0, flipped: false, knownCount: 0 });
+
+  renderVals() {
+    const accent = '#b45309';
+    const idle = '#9aa2ad';
+    const s = this.state.screen;
+    const nc = (k) => (s === k ? accent : idle);
+    const week = [
+      { label: 'M', done: true }, { label: 'T', done: true }, { label: 'W', done: true },
+      { label: 'T', done: true }, { label: 'F', done: false }, { label: 'S', done: false }, { label: 'S', done: false },
+    ].map((d) => ({ ...d, color: d.done ? accent : '#e4ddd0' }));
+
+    // ---- Role-play ----
+    const rpNodeKey = this.state.rpNode;
+    const rpDone = rpNodeKey === 'end';
+    const rpNode = this.rpScript()[rpNodeKey] || null;
+    const qColor = { good: '#3f7d5e', ok: '#b45309', weak: '#b4453a' };
+    const qLabel = { good: 'Confident', ok: 'Vague', weak: 'Risky' };
+    const rpChoices = rpNode ? rpNode.choices.map((c) => ({ ...c, onPick: () => this.rpChoose(c, rpNode.npc) })) : [];
+    const rpLog = this.state.rpLog.map((e) => ({ ...e, qColor: qColor[e.q], qLabel: qLabel[e.q] }));
+    const rpScore = this.state.rpScore;
+    const rpRating = rpScore >= 5 ? 'Confident & specific' : rpScore >= 3 ? 'Solid — keep sharpening' : 'Defensive — rebuild trust';
+    const rpRatingColor = rpScore >= 5 ? '#3f7d5e' : rpScore >= 3 ? '#b45309' : '#b4453a';
+    const rpStep = Math.min(this.state.rpTurns + 1, 3);
+
+    // ---- Vocabulary ----
+    const vlist = this.vocab();
+    const vTotal = vlist.length;
+    const vIndex = this.state.flashIndex;
+    const vDone = vIndex >= vTotal;
+    const vCard = vlist[Math.min(vIndex, vTotal - 1)];
+    const vFlipped = this.state.flipped;
+    const vNum = Math.min(vIndex + 1, vTotal);
+    const known = this.state.knownCount;
+
+    // ---- Onboarding ----
+    const levels = [
+      { id: 'a2', label: 'A2 · Elementary', desc: 'Simple, routine exchanges.' },
+      { id: 'b1', label: 'B1 · Intermediate', desc: 'Most work talk, with effort.' },
+      { id: 'b2', label: 'B2 · Upper-Int.', desc: 'Fluent at work, want precision.' },
+      { id: 'c1', label: 'C1 · Advanced', desc: 'Polished and persuasive.' },
+    ].map((l) => ({ ...l, sel: this.state.level === l.id, selOp: this.state.level === l.id ? 1 : 0, ring: this.state.level === l.id ? accent : '#e7e0d4', bg: this.state.level === l.id ? '#fbeedd' : '#fff', onPick: () => this.pickLevel(l.id) }));
+    const goals = [
+      { id: 'meet', label: 'Run better meetings' },
+      { id: 'neg', label: 'Negotiate with confidence' },
+      { id: 'email', label: 'Write sharper emails' },
+      { id: 'present', label: 'Present to leadership' },
+    ].map((g) => ({ ...g, sel: this.state.goal === g.id, ring: this.state.goal === g.id ? accent : '#e7e0d4', bg: this.state.goal === g.id ? '#fbeedd' : '#fff', dot: this.state.goal === g.id ? accent : '#d9d0c2', onPick: () => this.pickGoal(g.id) }));
+    const obStep = this.state.onboardStep;
+    const obCanNext = obStep === 0 ? !!this.state.level : obStep === 1 ? !!this.state.goal : true;
+    const obBtnBg = obCanNext ? '#23272e' : '#d8d0c3';
+
+    // ---- Progress ----
+    const barVals = [40, 65, 50, 80, 35, 90, 60];
+    const bars = ['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((label, i) => ({
+      label, h: barVals[i] + '%', c: i === 5 ? '#b45309' : '#e2d8c7',
+    }));
+    const skills = [
+      { name: 'Meetings', pct: 78, label: 'Strong', c: '#3f7d5e' },
+      { name: 'Negotiation', pct: 54, label: 'Building', c: '#b45309' },
+      { name: 'Email & writing', pct: 66, label: 'Solid', c: '#3f7d5e' },
+      { name: 'Presenting', pct: 38, label: 'Early', c: '#c0935a' },
+    ];
+    const badges = [
+      { g: 'S', name: '7-day streak', bg: '#fbeedd', bd: '#f0dcc0', ic: '#b45309' },
+      { g: 'N', name: 'First negotiation', bg: '#eef5ef', bd: '#cfe3d6', ic: '#3f7d5e' },
+      { g: '50', name: '50 words', bg: '#f4efe7', bd: '#e7ddcd', ic: '#5b6470' },
+    ];
+
+    // ---- Lesson ----
+    const lStep = this.state.lessonStep;
+    const lSel = this.state.lessonChoice;
+    const lAnswered = lSel !== null && lSel !== undefined;
+    const mcqByStep = {
+      1: { q: 'A client calls the timeline "aggressive." Which reply anchors a realistic scope without sounding negative?', correct: 1,
+           options: ['"We can probably hit it if nothing goes wrong."', '"I can commit the core build by Friday, and the rest by Tuesday."', '"That timeline is impossible for a team our size."'],
+           why: 'Naming a concrete, phased commitment anchors expectations and reads as competence — not resistance.' },
+      2: { q: 'Pick the phrase that defers a topic politely, without dismissing it.', correct: 1,
+           options: ['"Let\u2019s not get into that right now."', '"Let\u2019s circle back to that once we\u2019ve aligned on scope."', '"That\u2019s really not important at the moment."'],
+           why: '"Circle back" signals the topic matters and will return — it parks it without shutting the person down.' },
+    };
+    const lMcq = mcqByStep[lStep] || null;
+    const lOptions = lMcq ? lMcq.options.map((t, i) => {
+      const reveal = lAnswered;
+      const isCorrect = i === lMcq.correct;
+      const isSel = i === lSel;
+      let bg = '#fff', bd = '#e7e0d4', col = '#20242b';
+      if (reveal && isCorrect) { bg = '#eef5ef'; bd = '#b9d5c4'; col = '#2f6b4d'; }
+      else if (reveal && isSel) { bg = '#fbeeec'; bd = '#e6c4bd'; col = '#b4453a'; }
+      else if (reveal) { col = '#a7afba'; }
+      return { t, bg, bd, col, onPick: () => { if (!lAnswered) this.lessonPick(i); } };
+    }) : [];
+    const lWhy = lAnswered && lMcq ? lMcq.why : '';
+    const lProg = Math.round(((lStep + (lAnswered ? 1 : 0)) / 4) * 100);
+    const lCanNext = lMcq ? lAnswered : true;
+    const lBtnLabel = lStep >= 3 ? 'Finish lesson' : lStep === 0 ? "Let's begin" : 'Continue';
+    const lBtnBg = lCanNext ? '#23272e' : '#d8d0c3';
+
+    return {
+      screen: s,
+      isOnboarding: s === 'onboarding',
+      isHome: s === 'home',
+      isLesson: s === 'lesson',
+      isPractice: s === 'practice',
+      isRoleplay: s === 'roleplay',
+      isVocab: s === 'vocab',
+      isProgress: s === 'progress',
+      showTabs: ['home', 'practice', 'progress'].includes(s),
+      week,
+      goHome: () => this.go('home'),
+      goLesson: () => this.go('lesson'),
+      goPractice: () => this.go('practice'),
+      goVocab: () => this.go('vocab'),
+      goProgress: () => this.go('progress'),
+      cHome: nc('home'),
+      cPractice: nc('practice'),
+      cProgress: nc('progress'),
+
+      // role-play
+      startRoleplay: this.startRoleplay,
+      rpNode, rpChoices, rpLog, rpDone, rpScore, rpRating, rpRatingColor, rpStep,
+      rpHasLog: rpLog.length > 0,
+      rpActive: !rpDone,
+      rpShowScene: rpLog.length === 0 && !rpDone,
+      obDots: [0, 1, 2].map((i) => ({ w: i === obStep ? '20px' : '7px', c: i <= obStep ? accent : '#ddd4c6' })),
+      rpNpc: rpNode ? rpNode.npc : '',
+      rpEmotion: rpNode ? rpNode.emotion : '',
+      rpRestart: this.rpRestart,
+
+      // vocab
+      vCard, vTotal, vNum, vDone, vFlipped, known,
+      vActive: !vDone,
+      vNotFlipped: !vFlipped,
+      vFront: vFlipped, // flipped shows back
+      flipCard: this.flipCard,
+      markKnown: () => this.rateCard(true),
+      markUnknown: () => this.rateCard(false),
+      resetVocab: this.resetVocab,
+
+      // onboarding
+      levels, goals, obStep, obCanNext, obBtnBg,
+      obStep0: obStep === 0, obStep1: obStep === 1, obStep2: obStep === 2,
+      obNotLast: obStep !== 2,
+      nextOnboard: this.nextOnboard,
+      finishOnboard: this.finishOnboard,
+      goOnboarding: () => this.go('onboarding'),
+
+      // lesson
+      lStep, lStep0: lStep === 0, lStep1: lStep === 1, lStep2: lStep === 2, lStep3: lStep === 3,
+      lMcq, lOptions, lWhy, lAnswered, lProg, lCanNext, lBtnLabel, lBtnBg,
+      lessonNext: this.lessonNext,
+
+      // progress
+      bars, skills, badges,
+    };
+  }
+}
+</script>
+</body>
+</html>
